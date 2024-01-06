@@ -12,4 +12,6 @@ public class CreateContactDto
     public string CompanyName {get; set;}
     [Required]
     public string ContactType {get; set;}
+    [Required]
+    public string DataContent {get; set;}
 }

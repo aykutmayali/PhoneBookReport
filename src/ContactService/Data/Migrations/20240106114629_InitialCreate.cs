@@ -31,6 +31,7 @@ namespace ContactService.Data.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CompanyName = table.Column<string>(type: "text", nullable: true),
                     ContactType = table.Column<int>(type: "integer", nullable: false),
+                    DataContent = table.Column<string>(type: "text", nullable: true),
                     ContactId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>

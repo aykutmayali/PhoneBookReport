@@ -59,7 +59,7 @@ public class ContactsController: ControllerBase
         contact.Name = updateContactDto.Name ?? contact.Name;
         contact.Surname = updateContactDto.Surname ?? contact.Surname;
         contact.Company.CompanyName = updateContactDto.CompanyName ?? contact.Company.CompanyName;
-
+        contact.Company.DataContent = updateContactDto.DataContent ?? contact.Company.DataContent;
         // Check if updateContactDto.ContactType is not null before assigning
         contact.Company.ContactType = updateContactDto.ContactType != null
             ? Enum.Parse<ContactType>(updateContactDto.ContactType)

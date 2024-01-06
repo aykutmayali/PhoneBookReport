@@ -37,6 +37,9 @@ namespace ContactService.Data.Migrations
                     b.Property<int>("ContactType")
                         .HasColumnType("integer");
 
+                    b.Property<string>("DataContent")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ContactId")

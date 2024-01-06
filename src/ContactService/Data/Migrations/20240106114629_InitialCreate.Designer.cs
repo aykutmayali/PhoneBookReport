@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ContactService.Data.Migrations
 {
     [DbContext(typeof(ContactDbContext))]
-    [Migration("20240105205108_InitialCreate")]
+    [Migration("20240106114629_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -39,6 +39,9 @@ namespace ContactService.Data.Migrations
 
                     b.Property<int>("ContactType")
                         .HasColumnType("integer");
+
+                    b.Property<string>("DataContent")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
