@@ -1,0 +1,32 @@
+[
+    {
+        "RequestDate": "2024-01-06T21:00:00.788787Z",
+        "ReportStatus": 1,
+        "ReportDetail": "Company Alice, MobileNumber, 555 677 1121"
+    },
+    {
+        "RequestDate": "2024-01-06T21:00:00.788787Z",
+        "ReportStatus": 1,
+        "ReportDetail": "Company Bob, EmailAddress, bob@work.com"
+    },
+    {
+        "RequestDate": "2024-01-06T21:00:00.788787Z",
+        "ReportStatus": 1,
+        "ReportDetail": "Company Charlie, Location, Canakkale"
+    },
+    {
+        "RequestDate": "2024-01-06T21:00:00.788787Z",
+        "ReportStatus": 2,
+        "ReportDetail": "Company Dark, Location, Karaman"
+    },
+    {
+        "RequestDate": "2024-01-06T21:00:00.788787Z",
+        "ReportStatus": 2,
+        "ReportDetail": "Company Jane, EmailAddress, jane@work.com"
+    },
+    {
+        "RequestDate": "2024-01-06T21:00:00.788787Z",
+        "ReportStatus": 2,
+        "ReportDetail": "Company John, MobileNumber, 555 699 9090"
+    }
+]
