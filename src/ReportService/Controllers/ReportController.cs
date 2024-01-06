@@ -45,22 +45,3 @@ public class ReportsController: ControllerBase
         });
     }
 }
-
-
-
-
-
-
-
-
-
-
-//     [HttpGet]
-//     public async Task<ActionResult<List<Report>>> GetAllReports()
-//     {
-//         var query = DB.Find<Report>();
-//         query.Sort(x => x.Ascending(a => a.ReportStatus));
-//         var result = await query.ExecuteAsync();
-
-//         return result;
-//     }
