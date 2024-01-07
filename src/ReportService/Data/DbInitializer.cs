@@ -2,6 +2,7 @@ using System.Text.Json;
 using MongoDB.Driver;
 using MongoDB.Entities;
 using ReportService.Entities;
+using ReportService.Services;
 
 namespace ReportService.Data;
 
@@ -27,6 +28,17 @@ public class DbInitializer
             var reports = JsonSerializer.Deserialize<List<Report>>(reportData, options);
 
             await DB.SaveAsync(reports);
+        } else 
+        {
+            using var scope = app.Services.CreateScope();
+
+            var httpClient = scope.ServiceProvider.GetRequiredService<ContactServiceHttpClient>();
+
+            var items = await httpClient.GetItemsForReportDb();
+
+            System.Console.WriteLine(items.Count + " returned from the contact service");
+
+            if(items.Count> count) await DB.SaveAsync(items);
         }
     }
 }
