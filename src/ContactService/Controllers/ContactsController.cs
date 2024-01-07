@@ -1,7 +1,10 @@
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using AutoMapper;
 using ContactService.Data;
 using ContactService.DTOs;
 using ContactService.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +15,12 @@ public class ContactsController: ControllerBase
 {
     private readonly ContactDbContext _context;
     private readonly IMapper _mapper;
+    private readonly Random _random;
     public ContactsController(ContactDbContext context, IMapper mapper)
     {
         _context = context; 
         _mapper = mapper;
+        _random = new Random();
     }
 
     [HttpGet]
@@ -29,11 +34,30 @@ public class ContactsController: ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<ContactDto>> GetContactById(Guid id)
     {
-        var contact = await _context.Contacts.Include(x => x.Company).FirstOrDefaultAsync(x => x.Id == id);
+        var contact = await _context.Contacts.Include(x => x.Company)
+            .FirstOrDefaultAsync(x => x.Id == id);
 
         if(contact == null) return NotFound();
 
         return _mapper.Map<ContactDto>(contact);
+    }
+
+    [HttpGet("source")]
+    public ActionResult<List<ContactDto>> GetSourceContacts()
+    {
+        var contacts = _context.Contacts.Include(x => x.Company)
+            .OrderBy(x => x.Company.CompanyName).ToList();
+        var sourceDtos = contacts.Select(
+            contact => {
+                var sourceDto = new SourceDto
+                {
+                    RequestDate = DateTime.UtcNow,
+                    ReportStatus = _random.Next(1,3),
+                    ReportDetail = $"{contact.Company.CompanyName}, {contact.Company.ContactType}, {contact.Company.DataContent}"
+                };
+                return sourceDto;
+            }).ToList();
+        return Ok(sourceDtos);
     }
 
     [HttpPost]
