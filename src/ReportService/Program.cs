@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using MongoDB.Entities;
 using Polly;
 using Polly.Extensions.Http;
+using ReportService.Consumers;
 using ReportService.Data;
 using ReportService.Entities;
 using ReportService.Services;
@@ -10,14 +11,20 @@ using ReportService.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpClient<ContactServiceHttpClient>().AddPolicyHandler(GetPolicy());
-builder.Services.AddMassTransit(x => 
+
+builder.Services.AddMassTransit(x =>
     {
+        x.AddConsumersFromNamespaceContaining<ContactCreatedConsumer>();
+        x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("report", false));
         x.UsingRabbitMq((context, cfg) => 
         {
             cfg.ConfigureEndpoints(context);
         });
-    });
+    }
+);
+
 // Add services to the container.
 var app = builder.Build();
 
