@@ -4,6 +4,8 @@ using AutoMapper;
 using ContactService.Data;
 using ContactService.DTOs;
 using ContactService.Entities;
+using Contracts;
+using MassTransit;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +18,12 @@ public class ContactsController: ControllerBase
     private readonly ContactDbContext _context;
     private readonly IMapper _mapper;
     private readonly Random _random;
-    public ContactsController(ContactDbContext context, IMapper mapper)
+    private readonly IPublishEndpoint _publishedEndPoint;
+    public ContactsController(ContactDbContext context, IMapper mapper, IPublishEndpoint publishedEndPoint)
     {
         _context = context; 
         _mapper = mapper;
+        _publishedEndPoint = publishedEndPoint;
         _random = new Random();
     }
 
@@ -55,6 +59,8 @@ public class ContactsController: ControllerBase
                     ReportStatus = _random.Next(1,3),
                     ReportDetail = $"{contact.Company.CompanyName}, {contact.Company.ContactType}, {contact.Company.DataContent}"
                 };
+                var newReport = _mapper.Map<SourceDto>(sourceDto);
+                _publishedEndPoint.Publish(_mapper.Map<SourceCreated>(newReport));
                 return sourceDto;
             }).ToList();
         return Ok(sourceDtos);
