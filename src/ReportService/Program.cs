@@ -43,14 +43,14 @@ app.Lifetime.ApplicationStarted.Register(async ()=>
 
 });
 
-// try
-// {
-//     await DbInitializer.InitDb(app);
-// }
-// catch (Exception e)
-// {
-//     System.Console.WriteLine(e);
-// }
+try
+{
+    await DbInitializer.InitDb(app);
+}
+catch (Exception e)
+{
+    System.Console.WriteLine(e);
+}
 
 app.Run();
 
