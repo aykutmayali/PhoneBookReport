@@ -20,6 +20,10 @@ builder.Services.AddMassTransit(x =>
         x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("report", false));
         x.UsingRabbitMq((context, cfg) => 
         {
+            cfg.ReceiveEndpoint("report-contact-created", e =>{
+                e.UseMessageRetry(r => r.Interval(5,5));
+                e.ConfigureConsumer<ContactCreatedConsumer>(context);
+            });
             cfg.ConfigureEndpoints(context);
         });
     }

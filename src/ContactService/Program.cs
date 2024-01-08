@@ -1,3 +1,4 @@
+using ContactService.Consumers;
 using ContactService.Data;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,10 @@ builder.Services.AddMassTransit(x =>
 
             o.UseBusOutbox();
         });
+
+        x.AddConsumersFromNamespaceContaining<ContactCreatedFaultConsumer>();
+        x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("report", false));
+
         x.UsingRabbitMq((context, cfg) => 
         {
             cfg.ConfigureEndpoints(context);
