@@ -31,6 +31,8 @@ builder.Services.AddMassTransit(x =>
         });
     });
 
+builder.Services.AddScoped<IContactRepository, ContactRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
