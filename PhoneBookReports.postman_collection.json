@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "e3918897-49eb-4682-9d4e-ba8d2efff52c",
+		"name": "PhoneBookReports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6160409"
+	},
+	"item": [
+		{
+			"name": "get all contacts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7001/api/contacts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7001",
+					"path": [
+						"api",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get contact by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7001/api/contacts/51d4c494-469c-43eb-aa9a-32288f87080e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7001",
+					"path": [
+						"api",
+						"contacts",
+						"51d4c494-469c-43eb-aa9a-32288f87080e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create contact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Johan\",\n    \"surname\": \"Rembrant\",\n    \"companyName\": \"Company Bob\",\n    \"contactType\": \"EmailAddress\",\n    \"dataContent\": \"johan@work.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7001/api/contacts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7001",
+					"path": [
+						"api",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update contact by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Johan\",\n    \"surname\": \"Rembrant\",\n    \"companyName\": \"Company Alice\",\n    \"contactType\": \"MobileNumber\",\n    \"dataContent\": \"555 899 9090\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7001/api/contacts/d80f0a4e-83b9-419b-91d2-eebb4c2c60f4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7001",
+					"path": [
+						"api",
+						"contacts",
+						"d80f0a4e-83b9-419b-91d2-eebb4c2c60f4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete contact by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7001/api/contacts/74df4cd9-ddc6-4887-9c34-704864c4d166",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7001",
+					"path": [
+						"api",
+						"contacts",
+						"74df4cd9-ddc6-4887-9c34-704864c4d166"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all reports",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7002/api/reports?pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7002",
+					"path": [
+						"api",
+						"reports"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get reports filterBy ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7002/api/reports?filterBy=Location&pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7002",
+					"path": [
+						"api",
+						"reports"
+					],
+					"query": [
+						{
+							"key": "filterBy",
+							"value": "Location"
+						},
+						{
+							"key": "filterBy",
+							"value": "Email",
+							"disabled": true
+						},
+						{
+							"key": "filterBy",
+							"value": "Mobile",
+							"disabled": true
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all contacts for reports",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7001/api/contacts/source",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7001",
+					"path": [
+						"api",
+						"contacts",
+						"source"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
